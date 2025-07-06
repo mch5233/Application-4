@@ -8,6 +8,7 @@
    Company: [University of Central Florida]
    Website: theDRACOlab.com
    AI Use: Structure and synchronization patterns adapted from provided example
+   and troubleshooting purposes
 ---------------------------------------------------------------*/
 
 #include <stdio.h>
@@ -158,7 +159,12 @@ void medical_response_task(void *pvParameters) {
             
             // Alert LED sequence for medical emergency
             gpio_set_level(LED_ALERT_RED, 1);
-            
+            vTaskDelay(pdMS_TO_TICKS(200));
+            gpio_set_level(LED_ALERT_RED, 0);
+            vTaskDelay(pdMS_TO_TICKS(100));
+            gpio_set_level(LED_ALERT_RED, 1);
+            vTaskDelay(pdMS_TO_TICKS(200));
+          
             // BONUS - INDUCED FAILURE: Simulate medical response processing delay
             // This mimics real-world scenarios where medical staff may be busy
             // or medical equipment takes time to respond, potentially causing
